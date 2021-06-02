@@ -25,6 +25,18 @@ describe Oystercard do
     end
   end
 
+  describe '#touch_in' do
+    it 'updates the card to be touched on' do
+      subject.touch_in
+      expect(subject.injourney).to eq true
+    end
+  end
 
-
+  describe '#touch_out' do
+    it 'updates the card to be touched out' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject.injourney).to eq false
+    end
+  end
 end
