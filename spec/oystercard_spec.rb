@@ -39,4 +39,16 @@ describe Oystercard do
       expect(subject.injourney).to eq false
     end
   end
+
+  describe '#in_journey?' do
+    it 'lets us know if we are touched on' do
+      subject.touch_in
+      expect(subject.in_journey?).to eq 'In use'
+    end
+    it 'lets us know if we are touched on' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject.in_journey?).to eq 'Not touched on'
+    end
+  end
 end

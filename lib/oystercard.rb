@@ -29,4 +29,8 @@ class Oystercard
     @injourney = false
   end
 
+  def in_journey?
+    @injourney == true ? 'In use' : 'Not touched on'
+  end
+
 end
