@@ -16,5 +16,6 @@ class Oystercard
 
   def deduct(amount)
     @balance -= amount
+    "£#{amount} has been deducted"
   end
 end
