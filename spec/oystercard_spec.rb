@@ -27,25 +27,34 @@ describe Oystercard do
 
   describe '#touch_in' do
     it 'updates the card to be touched on' do
+      subject.top_up(20)
       subject.touch_in
-      expect(subject.injourney).to eq true
+      expect(subject.journey_status).to eq true
     end
+    it 'raises an error if there are not enough funds to touch in' do
+      minimum_balance = Oystercard::MINIMUM_BALANCE
+      expect{ subject.touch_in }.to raise_error "You don't have the minimum balance £#{minimum_balance} to touch on"
+    end
+
   end
 
   describe '#touch_out' do
     it 'updates the card to be touched out' do
+      subject.top_up(20)
       subject.touch_in
       subject.touch_out
-      expect(subject.injourney).to eq false
+      expect(subject.journey_status).to eq false
     end
   end
 
   describe '#in_journey?' do
     it 'lets us know if we are touched on' do
+      subject.top_up(20)
       subject.touch_in
       expect(subject.in_journey?).to eq 'In use'
     end
     it 'lets us know if we are touched on' do
+      subject.top_up(20)
       subject.touch_in
       subject.touch_out
       expect(subject.in_journey?).to eq 'Not touched on'
