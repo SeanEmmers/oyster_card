@@ -12,35 +12,12 @@ describe Oystercard do
       oyster_card.top_up(90)
       oyster_card.touch_in(entry_station)
     end
-    
-    # JOURNEY?
     it 'and it stores a journey' do
       oyster_card.touch_out(exit_station)
       expect(oyster_card.journey_list).to include journey
     end     
-    
-    describe '#touch_in' do
-      # JOURNEY?
-      it 'stores the entry station' do
-        expect(oyster_card.entry_station).to eq entry_station
-      end
-      # JOURNEY?
-      it 'updates the card to be touched on' do
-        expect(oyster_card.in_journey?).to eq true
-      end
-    end
-    
+     
     describe '#touch_out' do
-       it 'updates the card to be touched out' do
-         oyster_card.touch_out(exit_station)
-         expect(subject.in_journey?).to eq false
-      end
-      # JOURNEY?
-       it 'stores exit station' do
-           oyster_card.touch_out(exit_station)
-         expect(oyster_card.exit_station).to eq exit_station
-      end
-      # JOURNEY?
       it 'deducts a minimum fare when touching out' do 
         minimum_fare = Oystercard::MINIMUM_FARE - Oystercard::MINIMUM_FARE*2
         expect { oyster_card.touch_out(exit_station) }.to change{ oyster_card.balance }.by(minimum_fare)

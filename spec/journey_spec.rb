@@ -43,6 +43,15 @@ describe Journey do
         expect(subject.fare).to eq 6
       end
     end
+
+    describe '#in_journey?' do
+      # it 'updates the card to be touched out' do
+      #   expect(subject.in_journey?).to eq false
+      # end
+      it 'updates the card to be touched on' do
+        expect(subject.in_journey?).to eq true
+      end
+    end
   end
 end
 
