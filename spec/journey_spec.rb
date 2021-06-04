@@ -4,24 +4,28 @@ describe Journey do
   let(:station) { double :station, zone: 1 }
   let(:other_station) { double :other_station, zone: 3 }
   describe '#finish' do
-    it 'returns fare if they have not completed a journey' do
-      expect(subject.finish).to eq subject.fare
+    it 'returns true if they have not completed a journey' do
+      expect(subject.finish?).to eq true
     end
     it 'turns complete true if a journey has been completed' do
       subject.entry_station = station
       subject.exit_station(other_station)
-      subject.finish
-      expect(subject.complete).to eq true
+      subject.finish?
+      subject.fare
+      expect(subject.complete?).to eq true
     end
   end
   
   it "knows if a journey is not complete" do
     expect(subject.complete?).to eq false
   end
-  it 'has a penalty fare by default' do
+
+  describe '#fare' do
+    it 'returns a penalty fare' do
     expect(subject.fare).to eq Journey::PENALTY_FARE
+    end
   end
-  
+
   context 'given an entry station' do
     subject {described_class.new(station)}
     it 'has an entry station' do
@@ -33,7 +37,7 @@ describe Journey do
 
     context 'given an exit station' do
       before do
-        subject.finish
+        subject.finish?
       end
       it 'calculates a fare' do
         expect(subject.fare).to eq 6

@@ -17,8 +17,8 @@ class Journey
   @exit_station = station
   end
 
-  def finish
-  @exit_station == nil || @entry_station == nil ? fare : @complete = true
+  def finish?
+  @exit_station == nil || @entry_station == nil
   end
 
   def complete?
@@ -26,7 +26,8 @@ class Journey
   end
 
   def fare
-    @complete == true ? 'correct fare' : PENALTY_FARE
+    @complete = true
+    finish? == true ? PENALTY_FARE : 'Normal fare'
   end
 
 end

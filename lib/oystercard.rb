@@ -37,7 +37,7 @@ class Oystercard
   end
 
   def fare
-    balance -= journey.fare
+    @balance -= journey.fare
   end
 
   def journey_creator
